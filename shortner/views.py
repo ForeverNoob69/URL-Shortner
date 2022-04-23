@@ -23,20 +23,6 @@ def Home(request):
     return render(request, "home.html", contest)
 
 
-# def create(request):
-    if request.method == "POST":
-        url = request.POST["link"]
-        if len(url) == 0:
-            return render(request, "home.html")
-        uid = str(uuid.uuid4())[:5]
-        new_url = Urls(link=url, uuid=uid)
-        new_url.save()
-        contest = {
-            "variable": "localhost:8000/"+uid,
-            "placeholder": url}
-        return render(request, "home.html", contest)
-
-
 def go(request, pk):
     url_details = Urls.objects.get(uuid=pk)
     return redirect(url_details.link)
